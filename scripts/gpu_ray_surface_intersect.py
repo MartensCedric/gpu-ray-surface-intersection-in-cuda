@@ -55,6 +55,7 @@ class PyGpuRSI(object):
         #set up file structure
         self.setup()
         self.quiet_flag = "silent" if quiet else ""
+        self.quiet = quiet
         self.large_positive_value = 2.5e+8
 
     def __enter__(self):
@@ -226,8 +227,10 @@ class PyGpuRSI(object):
                 if f.endswith(e):
                     return True
             return False
-
-        print('cleaning up...')
+            
+        if not self.quiet:
+            print('cleaning up...')
+            
         for basename in os.listdir(self.wrk_dir):
             if match_ext(basename, ['.cu','.h','.exp','.lib','.pyc','_f32','_i32']):
                 os.remove(os.path.join(self.wrk_dir, basename))
