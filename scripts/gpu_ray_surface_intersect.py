@@ -55,6 +55,7 @@ class PyGpuRSI(object):
         #set up file structure
         self.setup()
         self.quiet_flag = "silent" if quiet else ""
+        self.quiet = quiet
         self.large_positive_value = 2.5e+8
 
     def __enter__(self):
